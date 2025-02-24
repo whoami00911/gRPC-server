@@ -1,0 +1,31 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+package grpcPb;
+option go_package = "/pkg/grpcPb";
+
+message LogRequest{
+    enum Actions{
+        REGISTER = 0;
+        LOGIN = 1;
+        CREATE = 2;
+        UPDATE = 3;
+        GET = 4;
+        DELETE = 5;
+    }
+    enum Entities{
+        USER = 0;
+        ENTITY = 1;
+    }
+    Actions action = 1;
+    Entities entity = 2;
+    int64 entityId = 3;
+    google.protobuf.Timestamp timestamp =  4;
+}
+
+
+message Emty{
+}
+
+service LogService{
+    rpc Log(LogRequest) returns (Emty){}
+}
