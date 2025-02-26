@@ -2,8 +2,9 @@ package grpcPb
 
 import (
 	"errors"
-	"gRPC-Server/pkg/logger"
 	"time"
+
+	"github.com/whoami00911/gRPC-server/pkg/logger"
 )
 
 const (
@@ -38,6 +39,7 @@ type LogItem struct {
 	Entity    string    `bson:"entity"`
 	Action    string    `bson:"action"`
 	EntityID  int64     `bson:"entity_id"`
+	UserID    int64     `bson:"user_id"`
 	Timestamp time.Time `bson:"timestamp"`
 }
 
