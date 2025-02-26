@@ -3,9 +3,10 @@ package repository
 import (
 	"context"
 	"fmt"
-	"gRPC-Server/pkg/logger"
 	"log"
 	"time"
+
+	"github.com/whoami00911/gRPC-server/pkg/logger"
 
 	"github.com/joho/godotenv"
 	"github.com/kelseyhightower/envconfig"

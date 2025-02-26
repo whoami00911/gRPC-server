@@ -3,8 +3,9 @@ package server
 import (
 	"context"
 	"fmt"
-	"gRPC-Server/pkg/grpcPb"
-	"gRPC-Server/pkg/logger"
+
+	"github.com/whoami00911/gRPC-server/pkg/grpcPb"
+	"github.com/whoami00911/gRPC-server/pkg/logger"
 )
 
 type Logging interface {
@@ -27,7 +28,7 @@ func NewLogServer(logserver Logging, logger *logger.Logger) *LogServer {
 func (l *LogServer) Log(ctx context.Context, req *grpcPb.LogRequest) (*grpcPb.Emty, error) {
 	if err := l.Logging.Insert(ctx, req); err != nil {
 		l.logger.Error(fmt.Sprintf("Insert Error: %s", err))
-		return &grpcPb.Emty{}, err
+		return nil, err
 	}
 	return &grpcPb.Emty{}, nil
 }

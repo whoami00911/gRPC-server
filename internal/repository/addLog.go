@@ -3,8 +3,9 @@ package repository
 import (
 	"context"
 	"fmt"
-	"gRPC-Server/pkg/grpcPb"
-	"gRPC-Server/pkg/logger"
+
+	"github.com/whoami00911/gRPC-server/pkg/grpcPb"
+	"github.com/whoami00911/gRPC-server/pkg/logger"
 
 	"go.mongodb.org/mongo-driver/mongo"
 )
