@@ -3,9 +3,10 @@ package repository
 import (
 	"context"
 	"fmt"
-	"gRPC-Server/pkg/logger"
 	"log"
 	"time"
+
+	"github.com/whoami00911/gRPC-server/pkg/logger"
 
 	"github.com/joho/godotenv"
 	"github.com/kelseyhightower/envconfig"
@@ -29,7 +30,7 @@ type Mongodb struct {
 func ConfigInicialize() *Config {
 	return &Config{
 		maxRetries:    3,
-		retryDelation: 1,
+		retryDelation: 1 * time.Second,
 		db:            Mongodb{},
 	}
 }

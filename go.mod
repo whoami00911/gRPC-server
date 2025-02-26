@@ -1,4 +1,4 @@
-module gRPC-Server
+module github.com/whoami00911/gRPC-server
 
 go 1.23.5
 

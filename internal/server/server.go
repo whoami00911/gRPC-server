@@ -3,10 +3,11 @@ package server
 import (
 	"context"
 	"fmt"
-	"gRPC-Server/pkg/grpcPb"
-	"gRPC-Server/pkg/logger"
 	"log"
 	"net"
+
+	"github.com/whoami00911/gRPC-server/pkg/grpcPb"
+	"github.com/whoami00911/gRPC-server/pkg/logger"
 
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
@@ -16,6 +17,7 @@ type Server struct {
 	grpcServer *grpc.Server
 	logService grpcPb.LogServiceServer
 	//grpcServerApi grpcPb.LogServiceServer
+	addr   string
 	port   string
 	logger *logger.Logger
 }
@@ -24,13 +26,15 @@ func NewGrpcServer(grpcLogServer grpcPb.LogServiceServer, logger *logger.Logger)
 	return &Server{
 		grpcServer: grpc.NewServer(),
 		logService: grpcLogServer,
+		addr:       viper.GetString("server.addr"),
 		port:       viper.GetString("server.port"),
 		logger:     logger,
 	}
 }
 
 func (s *Server) ListenAndServe() {
-	listener, err := net.Listen("tcp", s.port)
+	listener, err := net.Listen("tcp", fmt.Sprintf("%s:%s", s.addr, s.port))
+	//fmt.Printf("%s:%s", s.addr, s.port)
 	if err != nil {
 		s.logger.Error(fmt.Sprintf("ListenAndServe failed: %s", err))
 		log.Panic("ListenAndServe failed")
