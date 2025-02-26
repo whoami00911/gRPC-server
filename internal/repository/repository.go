@@ -3,8 +3,9 @@ package repository
 import (
 	"context"
 	"fmt"
-	"gRPC-Server/pkg/grpcPb"
-	"gRPC-Server/pkg/logger"
+
+	"github.com/whoami00911/gRPC-server/pkg/grpcPb"
+	"github.com/whoami00911/gRPC-server/pkg/logger"
 )
 
 type Logging interface {
@@ -27,6 +28,7 @@ func (r *Repository) Insert(ctx context.Context, req *grpcPb.LogRequest) error {
 		Entity:    req.GetEntity().String(),
 		Action:    req.GetAction().String(),
 		EntityID:  req.GetEntityId(),
+		UserID:    req.GetUserId(),
 		Timestamp: req.GetTimestamp().AsTime(),
 	}
 	if err := r.Logging.Insert(ctx, logItem); err != nil {
