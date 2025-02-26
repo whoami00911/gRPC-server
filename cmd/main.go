@@ -17,8 +17,8 @@ import (
 func main() {
 	logger := logger.GetLogger()
 	repo := repository.NewRepo(repository.NewDatabaseInicialize(repository.NewMongoConnect(), logger), logger)
-	service := service.NewService(repo)
-	logServer := server.NewLogServer(service)
+	service := service.NewService(repo, logger)
+	logServer := server.NewLogServer(service, logger)
 	grpcServer := server.NewGrpcServer(logServer, logger)
 	go grpcServer.ListenAndServe()
 
