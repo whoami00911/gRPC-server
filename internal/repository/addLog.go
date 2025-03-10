@@ -22,7 +22,7 @@ func NewDatabaseInicialize(db *mongo.Database, logger *logger.Logger) *Mongo {
 	}
 }
 
-func (m *Mongo) Insert(ctx context.Context, req grpcPb.LogItem) error {
+func (m *Mongo) Insert(ctx context.Context, req *grpcPb.LogItem) error {
 	_, err := m.db.Collection("logs").InsertOne(ctx, req)
 	if err != nil {
 		m.logger.Error(fmt.Sprintf("Error Insert to mongo: %s", err))

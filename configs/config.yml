@@ -1,3 +1,6 @@
 server:
   addr: localhost
   port: 8889
+rabbitmq:
+  url: amqp://guest:guest@localhost:5672/
+  queueName: logs

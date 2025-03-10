@@ -9,7 +9,7 @@ import (
 )
 
 type Logging interface {
-	Insert(ctx context.Context, req grpcPb.LogItem) error
+	Insert(ctx context.Context, req *grpcPb.LogItem) error
 }
 
 type Repository struct {
@@ -31,7 +31,7 @@ func (r *Repository) Insert(ctx context.Context, req *grpcPb.LogRequest) error {
 		UserID:    req.GetUserId(),
 		Timestamp: req.GetTimestamp().AsTime(),
 	}
-	if err := r.Logging.Insert(ctx, logItem); err != nil {
+	if err := r.Logging.Insert(ctx, &logItem); err != nil {
 		r.logger.Error(fmt.Sprintf("Error insert logItem: %s", err))
 		return err
 	}
